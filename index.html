@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Track your beer check-ins and connect with friends">
+    <title>BeerEal - Beer Check-in Tracker</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app">
+        <header class="app-header">
+            <h1 class="app-title">BeerEal</h1>
+            <button class="header-action" aria-label="Settings">⚙️</button>
+        </header>
+
+        <main class="app-main">
+            <!-- HOME PAGE -->
+            <div id="home-page" class="page-section page-active">
+                <section class="dashboard" aria-label="Progress Dashboard">
+                    <div class="dashboard-content">
+                        <h2 class="dashboard-title">Today's Progress</h2>
+                        
+                        <div class="progress-info">
+                            <div class="progress-stat">
+                                <span class="progress-label">Units</span>
+                                <span class="progress-value" id="units-count">0</span>
+                                <span class="progress-unit">/ 24</span>
+                            </div>
+                            <div class="progress-stat">
+                                <span class="progress-label">Pace</span>
+                                <span class="progress-value" id="pace-indicator">0</span>
+                                <span class="progress-unit">units/h</span>
+                            </div>
+                        </div>
+
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="24">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                            <div class="progress-labels">
+                                <span>0</span>
+                                <span>24</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="checkin-section" id="checkin-section" aria-label="Check-in Form" style="display: none;">
+                    <h2 class="section-title">New Check-in</h2>
+                    <form class="checkin-form" id="checkin-form">
+                        <div class="form-group">
+                            <label for="beer-type" class="form-label">Beer Type</label>
+                            <select id="beer-type" class="form-input" required>
+                                <option value="">Select a beer...</option>
+                                <option value="lager">Lager</option>
+                                <option value="ipa">IPA</option>
+                                <option value="stout">Stout</option>
+                                <option value="pilsner">Pilsner</option>
+                                <option value="wheat">Wheat Beer</option>
+                                <option value="pale-ale">Pale Ale</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="beer-units" class="form-label">Units</label>
+                            <input type="number" id="beer-units" class="form-input" min="1" max="10" value="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="photo-upload" class="form-label">Photo</label>
+                            <div class="photo-upload-wrapper">
+                                <input type="file" id="photo-upload" class="photo-upload-input" accept="image/*" capture="environment">
+                                <label for="photo-upload" class="photo-upload-label">
+                                    <span class="photo-icon">📸</span>
+                                    <span class="photo-text">Tap to add photo</span>
+                                </label>
+                                <div id="photo-preview" class="photo-preview"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkin-notes" class="form-label">Notes</label>
+                            <textarea id="checkin-notes" class="form-input form-textarea" placeholder="Add a note..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large">Check In</button>
+                    </form>
+                </section>
+
+                <section class="feed-section" aria-label="Social Feed">
+                    <h2 class="section-title">Feed</h2>
+                    <div class="feed-container" id="feed-container">
+                        <article class="feed-card">
+                            <div class="card-header">
+                                <div class="user-info">
+                                    <div class="user-avatar">👤</div>
+                                    <div class="user-details">
+                                        <h3 class="user-name">John Brewski</h3>
+                                        <time class="card-time">2 hours ago</time>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-photo" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <img src="" alt="Beer photo" style="display: none;">
+                            </div>
+                            <div class="card-content">
+                                <p class="card-beer-type">IPA</p>
+                                <p class="card-notes">Amazing craft beer from the local brewery!</p>
+                                <div class="card-stats">
+                                    <span class="card-units">2 units</span>
+                                    <span class="card-location">📍 Downtown Pub</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="feed-card">
+                            <div class="card-header">
+                                <div class="user-info">
+                                    <div class="user-avatar">👤</div>
+                                    <div class="user-details">
+                                        <h3 class="user-name">Sarah Hoppy</h3>
+                                        <time class="card-time">4 hours ago</time>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-photo" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <img src="" alt="Beer photo" style="display: none;">
+                            </div>
+                            <div class="card-content">
+                                <p class="card-beer-type">Lager</p>
+                                <p class="card-notes">Cold and crisp, perfect for the day</p>
+                                <div class="card-stats">
+                                    <span class="card-units">1.5 units</span>
+                                    <span class="card-location">📍 Garden Bar</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="feed-card">
+                            <div class="card-header">
+                                <div class="user-info">
+                                    <div class="user-avatar">👤</div>
+                                    <div class="user-details">
+                                        <h3 class="user-name">Mike Maltose</h3>
+                                        <time class="card-time">6 hours ago</time>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-photo" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <img src="" alt="Beer photo" style="display: none;">
+                            </div>
+                            <div class="card-content">
+                                <p class="card-beer-type">Stout</p>
+                                <p class="card-notes">Dark, rich, and delicious</p>
+                                <div class="card-stats">
+                                    <span class="card-units">2 units</span>
+                                    <span class="card-location">📍 Craft House</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+
+            <!-- BAKDAG PAGE -->
+            <div id="bakdag-page" class="page-section">
+                <section class="bakdag-section" aria-label="Bakdag Challenge">
+                    <div class="bakdag-header">
+                        <h2 class="section-title">Bakdag Challenge</h2>
+                        <p class="page-subtitle">A 24-unit beer challenge for the ultimate day</p>
+                    </div>
+
+                    <div class="bakdag-content">
+                        <div class="bakdag-card">
+                            <h3 class="bakdag-title">What's a Bakdag?</h3>
+                            <p class="bakdag-description">Bakdag is the ultimate beer challenge. The goal is to consume 24 beer units throughout the day. Track your progress, pace, and check-ins as you go.</p>
+                        </div>
+
+                        <div class="bakdag-rules">
+                            <h3 class="bakdag-title">How it Works</h3>
+                            <ul class="rules-list">
+                                <li>Start your bakdag when you're ready</li>
+                                <li>Log each beer check-in with type and units</li>
+                                <li>Monitor your pace and progress</li>
+                                <li>Reach 24 units to complete the challenge</li>
+                                <li>Share your results with friends</li>
+                            </ul>
+                        </div>
+
+                        <div class="bakdag-unit-info">
+                            <h3 class="bakdag-title">Beer Units</h3>
+                            <p class="unit-explanation">1 unit = ~0.5 liters (1 pint) of beer</p>
+                            <div class="unit-examples">
+                                <div class="unit-example">
+                                    <span class="example-beer">Lager</span>
+                                    <span class="example-units">~1 unit</span>
+                                </div>
+                                <div class="unit-example">
+                                    <span class="example-beer">Craft IPA</span>
+                                    <span class="example-units">~1.5 units</span>
+                                </div>
+                                <div class="unit-example">
+                                    <span class="example-beer">Double Stout</span>
+                                    <span class="example-units">~2 units</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bakdag-actions">
+                            <button class="btn btn-primary btn-large" id="start-bakdag-btn">Start Bakdag</button>
+                            <button class="btn btn-secondary btn-large">Learn More</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- PROFILE PAGE -->
+            <div id="profile-page" class="page-section">
+                <section class="profile-section" aria-label="User Profile">
+                    <div class="profile-container">
+                        <div class="profile-card">
+                            <div class="profile-avatar-large">👤</div>
+                            <h2 class="profile-name">Guest User</h2>
+                            <p class="profile-status">Not logged in</p>
+                        </div>
+
+                        <form class="login-form" id="login-form">
+                            <div class="form-group">
+                                <label for="login-email" class="form-label">Email</label>
+                                <input type="email" id="login-email" class="form-input" placeholder="your@email.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="login-password" class="form-label">Password</label>
+                                <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="checkbox-input">
+                                    <span>Keep me logged in</span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-large">Log In</button>
+                        </form>
+
+                        <div class="login-divider">
+                            <span>or</span>
+                        </div>
+
+                        <button class="btn btn-secondary btn-large" id="signup-btn">Create Account</button>
+
+                        <div class="profile-stats">
+                            <h3 class="stats-title">Your Stats</h3>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-number">0</span>
+                                    <span class="stat-label">Bakdags</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">0</span>
+                                    <span class="stat-label">Units</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">0</span>
+                                    <span class="stat-label">Streaks</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-link" id="logout-btn">Log Out</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <nav class="bottom-nav" aria-label="Main Navigation">
+            <a href="#" class="nav-item nav-active" data-page="home" aria-current="page">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Home</span>
+            </a>
+            <a href="#" class="nav-item" data-page="bakdag">
+                <span class="nav-icon nav-icon-large">🍺</span>
+                <span class="nav-label">Bakdag</span>
+            </a>
+            <a href="#" class="nav-item" data-page="profile">
+                <span class="nav-icon">👤</span>
+                <span class="nav-label">Profile</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js');
+        }
+
+        // Bakdag State Management
+        const getBakdagState = () => {
+            const state = localStorage.getItem('bakdag');
+            return state ? JSON.parse(state) : { active: false, startTime: null };
+        };
+
+        const setBakdagState = (state) => {
+            localStorage.setItem('bakdag', JSON.stringify(state));
+        };
+
+        const updateCheckinFormVisibility = () => {
+            const bakdagState = getBakdagState();
+            const checkinSection = document.getElementById('checkin-section');
+            if (bakdagState.active) {
+                checkinSection.style.display = 'block';
+            } else {
+                checkinSection.style.display = 'none';
+            }
+        };
+
+        // Initialize bakdag state on page load
+        updateCheckinFormVisibility();
+
+        // Page Navigation
+        document.querySelectorAll('.nav-item[data-page]').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = item.getAttribute('data-page');
+                
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('page-active');
+                });
+                document.getElementById(page + '-page').classList.add('page-active');
+                
+                document.querySelectorAll('.nav-item[data-page]').forEach(navItem => {
+                    navItem.classList.remove('nav-active');
+                });
+                item.classList.add('nav-active');
+            });
+        });
+
+        // Start Bakdag Button
+        const startBakdagBtn = document.getElementById('start-bakdag-btn');
+        if (startBakdagBtn) {
+            startBakdagBtn.addEventListener('click', () => {
+                const bakdagState = {
+                    active: true,
+                    startTime: new Date().toISOString()
+                };
+                setBakdagState(bakdagState);
+                updateCheckinFormVisibility();
+                
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('page-active');
+                });
+                document.getElementById('home-page').classList.add('page-active');
+                
+                document.querySelectorAll('.nav-item[data-page]').forEach(navItem => {
+                    navItem.classList.remove('nav-active');
+                });
+                document.querySelector('.nav-item[data-page="home"]').classList.add('nav-active');
+            });
+        }
+    </script>
+</body>
+
+</html>
