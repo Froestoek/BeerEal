@@ -887,6 +887,310 @@ textarea:focus-visible {
   background: var(--color-text-secondary);
 }
 
+/* Drinks Section */
+.drinks-section {
+  padding: 0 var(--spacing-lg);
+}
+
+.drinks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-2xl);
+  gap: var(--spacing-lg);
+}
+
+.drinks-header .section-title {
+  margin: 0;
+}
+
+#add-drink-btn {
+  white-space: nowrap;
+}
+
+.drinks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.drink-card {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  text-align: center;
+  box-shadow: 0 4px 6px var(--color-shadow);
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.drink-card:active {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px var(--color-shadow-dark);
+}
+
+.drink-image {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+}
+
+.drink-name {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin: var(--spacing-md) 0 var(--spacing-xs) 0;
+  color: var(--color-text);
+}
+
+.drink-units {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  font-weight: 600;
+  margin: 0;
+}
+
+.add-drink-form {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+  box-shadow: 0 4px 6px var(--color-shadow);
+}
+
+.form-section-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin: 0 0 var(--spacing-lg) 0;
+  color: var(--color-text);
+}
+
+.form-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin: var(--spacing-sm) 0 0 0;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Settings Section */
+.settings-section {
+  padding: 0 var(--spacing-lg);
+}
+
+.settings-group {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: 0 4px 6px var(--color-shadow);
+}
+
+.settings-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin: 0 0 var(--spacing-lg) 0;
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: var(--font-size-sm);
+}
+
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.settings-item:last-child {
+  border-bottom: none;
+}
+
+.settings-label-group {
+  flex: 1;
+}
+
+.settings-label {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.settings-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.settings-actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-border);
+  transition: background-color var(--transition-fast);
+  border-radius: 28px;
+}
+
+.toggle-slider::before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: transform var(--transition-fast);
+  border-radius: 50%;
+}
+
+.toggle-input:checked + .toggle-slider {
+  background-color: var(--color-primary);
+}
+
+.toggle-input:checked + .toggle-slider::before {
+  transform: translateX(22px);
+}
+
+/* Bakdag Controls */
+.bakdag-controls {
+  padding: var(--spacing-lg);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bakdag-button-container {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.bakdag-button-container .btn {
+  flex: 1;
+}
+
+/* Stats Page */
+.stats-section {
+  padding: var(--spacing-lg);
+}
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-2xl);
+  gap: var(--spacing-md);
+}
+
+.stats-header h2 {
+  flex: 1;
+}
+
+.stats-header .btn {
+  white-space: nowrap;
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.stat-card {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  text-align: center;
+  border: 1px solid var(--color-border);
+}
+
+.stat-card-wide {
+  grid-column: 1 / -1;
+}
+
+.stat-card-fun {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: var(--color-text);
+  border: none;
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.stat-value {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.stat-card-fun .stat-value {
+  color: var(--color-bg);
+}
+
+.stat-card-fun .stat-label {
+  color: var(--color-bg);
+  opacity: 0.9;
+}
+
+.stat-sub {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.stat-card-fun .stat-sub {
+  color: var(--color-bg);
+  opacity: 0.8;
+}
+
+.stats-actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.stats-actions .btn {
+  flex: 1;
+}
+
 /* Responsive */
 @media (min-width: 480px) {
   .dashboard-content {
@@ -904,6 +1208,10 @@ textarea:focus-visible {
   .card-photo {
     height: 300px;
   }
+  
+  .drinks-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (min-width: 768px) {
@@ -919,5 +1227,9 @@ textarea:focus-visible {
   
   .feed-card {
     border-radius: var(--radius-xl);
+  }
+  
+  .drinks-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
